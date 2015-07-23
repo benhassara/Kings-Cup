@@ -36,15 +36,14 @@ var shufDeck = shuffle(deck);
 
 function addCard(cardChar) {
 
-  var newDiv = document.createElement("div");
+  var newCard = document.createElement("div");
   var newContent = document.createTextNode(cardChar);
   var parent = document.getElementById("someId");
 
 
-  newDiv.setAttribute("class", "card");
-  newDiv.appendChild(newContent);
-  parent.insertBefore(newDiv, parent.firstChild);
-  // parent.appendChild(newDiv);
+  newCard.setAttribute("class", "card");
+  newCard.appendChild(newContent);
+  parent.insertBefore(newCard, parent.firstChild);
 
 }
 
@@ -54,11 +53,11 @@ function cardDiscard() {
     //if shufDeck empty, func will return undefined
     if (shufDeck[0] !== undefined) {
       var picked = shufDeck[0].unicode;
-      var x = shufDeck.shift();
+      var cardObj = shufDeck.shift();
 
       addCard(picked);
 
-      return x;
+      return cardObj;
     }
 }
 
@@ -68,9 +67,6 @@ function showCard(num){
       var current = cardDiscard();
       if (current !== undefined) {
         var msg = (playRound(current.rank));
-        // var k = document.createTextNode(msg);
-        // var j = document.getElementById("someId");
-        // j.appendChild(k);
         var newText = document.createElement('span');
         var parent = document.getElementById('someId');
         newText.innerText = msg;
@@ -79,7 +75,14 @@ function showCard(num){
       }
       else {
         alert(playRound(current));
-        window.location.reload();
+        // window.location.reload();
+        if (!findButton()) {
+          var btnReset = document.createElement('button');
+          var after = document.getElementById('someId');
+          document.body.insertBefore(btnReset, after);
+          btnReset.innerText = "Reset";
+          btnReset.addEventListener('click', resetGame);
+        }
       }
     }
 }
@@ -168,4 +171,20 @@ function shuffle(deck) {
     }
   }
   return shuffled;
+}
+
+function resetGame() {
+  //reset screen without reloading
+  shufDeck = shuffle(deck);
+  document.getElementById('someId').innerHTML = "";
+}
+
+function findButton() {
+  var btns = document.getElementsByTagName('button');
+  var exist = false;
+  if (btns.length >= 1)
+    return true;
+  else
+    return false;
+
 }
