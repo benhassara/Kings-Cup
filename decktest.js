@@ -67,24 +67,31 @@ function showCard(num){
       var current = cardDiscard();
       if (current !== undefined) {
         var msg = (playRound(current.rank));
-        var newText = document.createElement('span');
-        var parent = document.getElementById('someId');
-        newText.innerText = msg;
-        newText.className = 'rnd-text';
-        parent.insertBefore(newText, parent.firstChild.nextSibling);
+        addMessage(msg);
       }
       else {
         alert(playRound(current));
-        // window.location.reload();
         if (!findButton()) {
-          var btnReset = document.createElement('button');
-          var after = document.getElementById('someId');
-          document.body.insertBefore(btnReset, after);
-          btnReset.innerText = "Reset";
-          btnReset.addEventListener('click', resetGame);
+          addButton();
         }
       }
     }
+}
+
+function addMessage(msg) {
+  var newText = document.createElement('span');
+  var parent = document.getElementById('someId');
+  newText.innerText = msg;
+  newText.className = 'rnd-text';
+  parent.insertBefore(newText, parent.firstChild.nextSibling);
+}
+
+function addButton() {
+  var btnReset = document.createElement('button');
+  var after = document.getElementById('someId');
+  document.body.insertBefore(btnReset, after);
+  btnReset.innerText = "Reset";
+  btnReset.addEventListener('click', resetGame);
 }
 
 //Function checking card's rank with switch statement for output
@@ -188,3 +195,6 @@ function findButton() {
     return false;
 
 }
+
+var x = prompt('How many cards dealt each turn?');
+
