@@ -1,49 +1,21 @@
-// Create array "deck" containing each card object
-var deck = [
-  {rank: 1, unicode: "🂡"}, {rank: 1, unicode: "🂱"},
-  {rank: 1, unicode: "🃁"}, {rank: 1, unicode: "🃑"},
-  {rank: 2, unicode: "🂢"}, {rank: 2, unicode: "🂲"},
-  {rank: 2, unicode: "🃂"}, {rank: 2, unicode: "🃒"},
-  {rank: 3, unicode: "🂣"}, {rank: 3, unicode: "🂳"},
-  {rank: 3, unicode: "🃃"}, {rank: 3, unicode: "🃓"},
-  {rank: 4, unicode: "🂤"}, {rank: 4, unicode: "🂴"},
-  {rank: 4, unicode: "🃄"}, {rank: 4, unicode: "🃔"},
-  {rank: 5, unicode: "🂥"}, {rank: 5, unicode: "🂵"},
-  {rank: 5, unicode: "🃅"}, {rank: 5, unicode: "🃕"},
-  {rank: 6, unicode: "🂦"}, {rank: 6, unicode: "🂶"},
-  {rank: 6, unicode: "🃆"}, {rank: 6, unicode: "🃖"},
-  {rank: 7, unicode: "🂧"}, {rank: 7, unicode: "🂷"},
-  {rank: 7, unicode: "🃇"}, {rank: 7, unicode: "🃗"},
-  {rank: 8, unicode: "🂨"}, {rank: 8, unicode: "🂸"},
-  {rank: 8, unicode: "🃈"}, {rank: 8, unicode: "🃘"},
-  {rank: 9, unicode: "🂩"}, {rank: 9, unicode: "🂹"},
-  {rank: 9, unicode: "🃉"}, {rank: 9, unicode: "🃙"},
-  {rank: 10, unicode: "🂪"}, {rank: 10, unicode: "🂺"},
-  {rank: 10, unicode: "🃊"}, {rank: 10, unicode: "🃚"},
-  {rank: 11, unicode: "🂫"}, {rank: 11, unicode: "🂻"},
-  {rank: 11, unicode: "🃋"}, {rank: 11, unicode: "🃛"},
-  {rank: 12, unicode: "🂭"}, {rank: 12, unicode: "🂽"},
-  {rank: 12, unicode: "🃍"}, {rank: 12, unicode: "🃝"},
-  {rank: 13, unicode: "🂮"}, {rank: 13, unicode: "🂾"},
-  {rank: 13, unicode: "🃎"}, {rank: 13, unicode: "🃞"}
-  ];
-
 // Shuffle Deck into new array "shufDeck"
 
 var shufDeck = shuffle(deck);
 
 // Styling function using DOM manipulation
 
-function addCard(cardChar) {
+function addCard(cardChar, msg) {
+// add a card & round message to the page
 
-  var newCard = document.createElement("div");
-  var newContent = document.createTextNode(cardChar);
-  var parent = document.getElementById("someId");
+  var $container = $('<div class="round">');
+  var $newCard = $('<div class="card">');
+  var $message = $('<div class="rnd-text">');
 
+  $newCard.html(cardChar);
+  $container.append(newCard);
+  $container.append(message);
 
-  newCard.setAttribute("class", "card");
-  newCard.appendChild(newContent);
-  parent.insertBefore(newCard, parent.firstChild);
+  $('#someID').prepend($container);
 
 }
 
@@ -76,14 +48,6 @@ function showCard(num){
         }
       }
     }
-}
-
-function addMessage(msg) {
-  var newText = document.createElement('span');
-  var parent = document.getElementById('someId');
-  newText.innerText = msg;
-  newText.className = 'rnd-text';
-  parent.insertBefore(newText, parent.firstChild.nextSibling);
 }
 
 function addButton() {
